@@ -40,6 +40,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/outputs.h>
 #include "user_macros.dtsi"
 
 #include <behaviors/meteorite_custom_key.dtsi>
@@ -275,9 +276,9 @@
         NAV_layer {
             display-name = "Nav";
             bindings = <
-&kp ESC    &mc_swap   &mc_tab   &mc_zscrl  &mo SCROLL                    &kp HOME        &kp PG_DN     &kp PG_UP  &kp END    &mkp LCLK
-&sk LCTRL  &sk LSHFT  &sk LALT  &sk LGUI   &kp TAB                       &kp LEFT        &kp DOWN      &kp UP     &kp RIGHT  &mkp RCLK
-&mc_undo   &mc_cut    &mc_copy  &mc_paste  &mc_redo    &none    &none    &msc SCRL_DOWN  &msc SCRL_UP  &mc_zmin   &mc_zmout  &mkp MCLK
+&kp ESC    &mc_swap   &mc_tab   &mc_zscrl  &mo SCROLL                    &kp HOME        &kp PG_DN     &kp PG_UP  &kp END    &mkp MB1
+&sk LCTRL  &sk LSHFT  &sk LALT  &sk LGUI   &kp TAB                       &kp LEFT        &kp DOWN      &kp UP     &kp RIGHT  &mkp MB2
+&mc_undo   &mc_cut    &mc_copy  &mc_paste  &mc_redo    &none    &none    &msc SCRL_DOWN  &msc SCRL_UP  &mc_zmin   &mc_zmout  &mkp MB3
            &trans     &trans    &trans                 &none    &none    &trans          &trans        &none
             >;
 

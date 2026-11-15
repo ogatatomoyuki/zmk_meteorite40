@@ -318,7 +318,7 @@
          *     1番目=BT_SEL 0 → iPad mini / 2番目=BT_SEL 1 → iPad Pro
          *     3番目=BT_SEL 2 → iPhone    / 4番目=BT_SEL 3 → Daylight DC-1
          *     5番目=BT_SEL 4 → Mac mini
-         *   ★ペアリング実体は各機が個別保持。番号を揃えるには CLR_ALL で全消去 →
+         *   ★ペアリング実体は各機が個別保持。番号を揃えるには 各プロファイルを選んで CLR で1つずつ消去 →
          *     1番目を選んで iPad mini とペアリング → 2番目… と手作業で順に入れ直す。
          *   ★CLR は BT 列の真下（関連操作が縦に並ぶ＋小指側で誤爆しにくい）。
          *   ★左手下段は**将来の拡張枠**。RGB系は基本使わないため**全機で廃止**
@@ -331,7 +331,7 @@
             bindings = <
 &bt BT_SEL 0  &bt BT_SEL 1   &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                  &kp F1   &kp F2   &kp F3   &kp F4   &kp F5
 &bt BT_CLR    &out OUT_TOG   &kp K_MUTE    &kp K_VOL_DN  &kp K_VOL_UP                  &kp F6   &kp F7   &kp F8   &kp F9   &kp F10
-&bt BT_CLR_ALL &none         &none         &none         &none         &none   &none   &kp F11  &kp F12  &kp F13  &kp F14  &kp F15
+&none          &none         &none         &none         &none         &none   &none   &kp F11  &kp F12  &kp F13  &kp F14  &kp F15
               &trans         &trans        &trans                      &none   &none   &trans   &trans   &none
             >;
 

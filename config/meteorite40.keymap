@@ -22,7 +22,9 @@
  *   右親指は 37(BSPC) / 38(ENT) の2キーのみ（39はエンコーダ）。
  *
  * ■ レイヤー
- *   0 BASE / 1 NAV / 2 SYM / 3 FUN(NAV+SYM) / 4 SCROLL / 5 ZOOM / 6 SETTING
+ *   0 BASE / 1 NAV / 2 SYM / 3 FUN(NAV+SYM) / 4 SCROLL / 5 ZOOM
+ *   ※SETTING層は作らない。BT関連は FUN層に集約し、bootloader/sys_reset は
+ *     コンボ(Q+B+親指)で叩けるため専用層が不要（2026-11-15 緒方さん判断）。
  *
  * ■ トラックボール
  *   本機は「Ball Profile ルーター」で**レイヤーごとにボールの役割**を決める。
@@ -63,7 +65,6 @@
 #define FUN     3
 #define SCROLL  4
 #define ZOOM    5
-#define SETTING 6
 
 /* --- One-Shot Modifier（Callum式・艦隊共通） --- */
 &sk {
@@ -77,7 +78,7 @@
 };
 
 /* --- ボールの役割をレイヤーごとに指定 ---
- * index: 0=BASE 1=NAV 2=SYM 3=FUN 4=SCROLL 5=ZOOM 6=SETTING 7=RESERVE
+ * index: 0=BASE 1=NAV 2=SYM 3=FUN 4=SCROLL 5=ZOOM 6,7=未使用
  * ★NAV は BALL_OFF のまま（範囲選択を殺さないため）。SCROLL / ZOOM だけ BALL_SCROLL。
  */
 &ball_profile_defaults {
@@ -310,9 +311,9 @@
         FUN_layer {
             display-name = "Fun";
             bindings = <
-&kp F1   &kp F2   &kp F3  &kp F4  &kp F5                   &none         &none         &none         &none       &none
-&kp F6   &kp F7   &kp F8  &kp F9  &kp F10                  &kp K_MUTE    &kp K_VOL_DN  &kp K_VOL_UP  &none       &none
-&kp F11  &kp F12  &none   &none   &none   &none    &none   &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_CLR  &out OUT_TOG
+&kp F1   &kp F2   &kp F3  &kp F4  &kp F5                   &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_CLR_ALL  &none       &studio_bt
+&kp F6   &kp F7   &kp F8  &kp F9  &kp F10                  &kp K_MUTE    &kp K_VOL_DN  &kp K_VOL_UP    &none       &none
+&kp F11  &kp F12  &none   &none   &none   &none    &none   &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2    &bt BT_CLR  &out OUT_TOG
          &trans   &trans  &trans          &none    &none   &trans        &trans        &none
             >;
 
@@ -352,20 +353,6 @@
                 <&enc_kp C_VOL_DN C_VOL_UP>;
         };
 
-        /* SETTING — BT / Studio / bootloader（到達はコンボ推奨だが保険として残す） */
-        SETTING_layer {
-            display-name = "Setting";
-            bindings = <
-&studio_bt  &none  &none  &none  &none                       &bt BT_SEL 0  &bt BT_SEL 1    &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
-&none       &none  &none  &none  &none                       &bt BT_CLR    &bt BT_CLR_ALL  &none         &none         &none
-&none       &none  &none  &none  &none     &none    &none    &bootloader   &none           &none         &none         &sys_reset
-            &trans &trans &trans           &none    &none    &trans        &trans          &trans
-            >;
-
-            sensor-bindings =
-                <&enc_kp C_VOL_DN C_VOL_UP>,
-                <&enc_kp C_VOL_DN C_VOL_UP>;
-        };
 
         layer_7 {
             status = "reserved";
